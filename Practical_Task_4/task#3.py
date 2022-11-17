@@ -1,10 +1,10 @@
-# a  = int(input())
-# if a < 1:
-#     raise Exception('Возбуждено исключение')
-# else:
-#     print('1a')
 
 def simplenum(num):
+    """
+    Функция проверяет числовое значение, является ли оно простым или нет
+    :param num: число
+    :return: Булевое значение
+    """
     if num < 1:
         raise Exception('Введено значение меньше единицы')
 
@@ -14,5 +14,4 @@ def simplenum(num):
     return True
 
 
-print(simplenum(20))
-print(simplenum(3))
+print(simplenum(num=int(input("Введите число"))))
