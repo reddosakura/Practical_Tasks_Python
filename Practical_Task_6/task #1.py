@@ -48,7 +48,6 @@ def main() -> None:
     newtab = []
     with open('tab.csv') as tab:
         reader = csv.DictReader(tab)
-
         for i in list(reader):
             newtab.append({'Type: ': i['Type:'],  # генерация новой таблицы с расчитанными пзначениями для заданной грузоподъемности контейнера
                            'Count:': 0 if int(i['Weight, kg:']) // int(i['Count:']) > loadcapacity else loadcapacity / (int(i['Weight, kg:']) / int(i['Count:'])),

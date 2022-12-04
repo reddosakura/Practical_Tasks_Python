@@ -24,7 +24,7 @@ if not os.path.exists('cars.csv'):
                                      input('Введите неисправность: ').upper()))
         except ValueError:
             print('Введено неверное значение для параметра')
-    with open('cars.csv', 'w', encoding='utf-8') as f:
+    with open('cars.csv', 'w') as f:
         writer = csv.DictWriter(
             f, fieldnames=list(data[0].keys()), quoting=csv.QUOTE_NONNUMERIC)
         writer.writeheader()
@@ -37,11 +37,11 @@ def main() -> None:
     Основная функция
     :return:
     """
-    file = csv.reader(of := open('cars.csv'))  # открытие файла
+    file = csv.reader(of := open('cars.csv', 'r', encoding='cp1251'))  # открытие файла
     tab = list(file)
 
     del tab[0]  # удаляем первую строчку
-    print('Таблица с автомашинами, идеющими неисправности:')
+    print('Таблица с автомашинами, имеющими неисправности:')
     print(tabulate([_ for _ in list(filter(lambda x: x, tab)) if _[-1] != 'ОТСУТСТВУЕТ'], headers=['Car number:', 'Car model:', 'Breaking:']))  # фильтруем и выводим таблицу по неисправностям
     of.close()  # закрытие файла
 
