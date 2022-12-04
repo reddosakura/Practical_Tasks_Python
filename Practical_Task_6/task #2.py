@@ -4,6 +4,13 @@ import os
 
 
 def generateitem(number: str, carmodel: str, breaking: str) -> dict:
+    """
+    Функция генерирует строчку таблицы
+    :param number: Номер машины(строка)
+    :param carmodel: Марка машины(строка)
+    :param breaking: Неисправность(строка)
+    :return: словарь с заполненными значениями
+    """
     if not number or not carmodel or not breaking:
         raise Exception('Не все параметры были введены')
     return {'carnumber': number, 'carmodel': carmodel, 'breaking': breaking}
@@ -25,13 +32,18 @@ if not os.path.exists('cars.csv'):
             writer.writerow(d)
 
 
-def main():
-    file = csv.reader(of := open('cars.csv'))
+def main() -> None:
+    """
+    Основная функция
+    :return:
+    """
+    file = csv.reader(of := open('cars.csv'))  # открытие файла
     tab = list(file)
 
-    del tab[0]
-    print(tabulate([_ for _ in list(filter(lambda x: x, tab)) if _[-1] != 'ОТСУТСТВУЕТ'], headers=['Car number:', 'Car model:', 'Breaking:']))
-    of.close()
+    del tab[0]  # удаляем первую строчку
+    print('Таблица с автомашинами, идеющими неисправности:')
+    print(tabulate([_ for _ in list(filter(lambda x: x, tab)) if _[-1] != 'ОТСУТСТВУЕТ'], headers=['Car number:', 'Car model:', 'Breaking:']))  # фильтруем и выводим таблицу по неисправностям
+    of.close()  # закрытие файла
 
 
 if __name__ == '__main__':
